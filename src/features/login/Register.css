@@ -1,4 +1,4 @@
-.register__button {
+.register > .register__button {
   padding: 10px;
   margin: 10px 0px;
   border-radius: 5px;
@@ -10,12 +10,52 @@
   cursor: pointer;
   width: 100%;
 }
-.register__button:hover {
+.register > .register__button:hover {
+  background-color: gainsboro;
+  color: #43c506;
+}
+.closeIcon {
+  padding: 10px;
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+}
+.closeIcon:hover {
+  color: gray;
+}
+.register__fullname {
+  display: flex;
+  justify-content: space-evenly;
+}
+.birth_date {
+  display: flex;
+  width: 100%;
+  margin: 10px 0px;
+  justify-content: space-evenly;
+}
+.birth_date_label {
+  color: black;
+  font-size: 15px;
+  margin: 10px 0px;
+}
+.gender {
+  margin: 10px 0px;
+}
+.gender > .MuiFormControl-root > .MuiFormLabel-root {
+  font-size: 15px;
+  color: black;
+}
+.MuiDialogActions-root > button {
+  width: 60%;
+  background-color: #43c506;
+  color: white;
+}
+.MuiDialogActions-root > button:hover {
   background-color: gainsboro;
   color: #43c506;
 }
 @media screen and (max-width: 860px) {
-  .register__button {
+  .register > .register__button {
     padding: 10px;
     margin: 10px 0px;
     border-radius: 5px;
