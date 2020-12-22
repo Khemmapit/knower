@@ -1,0 +1,239 @@
+/* Desktop/Laptop */
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: "Rubik";
+}
+.login_left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  padding: 10px;
+  max-width: 500px;
+}
+.login_left > h1 {
+  color: #de5c8e;
+  font-size: 60px;
+}
+.login_left > p {
+  font-size: 20px;
+}
+.login_right {
+  width: 30vw;
+  height: fit-content;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 30px;
+}
+.login_box {
+  display: flex;
+  flex-direction: column;
+}
+.login_boxDefault {
+  display: flex;
+  flex-direction: column;
+}
+/* .login_boxDefault > input {
+  padding: 10px;
+  margin: 5px 0px;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  font-size: 20px;
+}
+.login_boxDefault > input:focus {
+  border: 1px solid #de5c8e;
+  outline-width: 0;
+  box-shadow: 0 0 3px 1px rgba(222, 92, 142, 0.25);
+} */
+.login_boxDefault > .MuiTextField-root {
+  margin: 5px 0px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+.login_boxDefault > button {
+  padding: 10px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  background-color: #de5c8e;
+  color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  cursor: pointer;
+}
+.login_boxDefault > button:hover {
+  background-color: gainsboro;
+  color: #de5c8e;
+}
+/* ลืมรหัสผ่านหรอ ? */
+.login_box > p {
+  color: #de5c8e;
+  cursor: pointer;
+}
+.login_box > p:hover {
+  text-decoration: underline;
+}
+.login_boxProvider > button {
+  padding: 10px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  background-color: white;
+  color: black;
+  font-family: "Rubik";
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+.login_boxProvider > button:hover {
+  border: 1px solid #de5c8e;
+  outline-width: 0;
+  box-shadow: 0 0 3px 1px rgba(222, 92, 142, 0.25);
+}
+.login_boxProvider > button > span {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.login_boxProvider > button > span > img {
+  height: 30px;
+}
+.login_boxProvider > button > span > p {
+  flex: 0.9;
+  justify-content: center;
+}
+.login_box > hr {
+  background-color: #c4c4c4;
+  width: 100%;
+  margin: 10px 0px;
+  border: 1px solid #c4c4c4;
+}
+/* Register button */
+.login_box > button {
+  padding: 10px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  background-color: #43c506;
+  color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  cursor: pointer;
+}
+.login_box > button:hover {
+  background-color: gainsboro;
+  color: #43c506;
+}
+/* Medium */
+@media screen and (max-width: 860px) {
+  .login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .login_left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    padding: 0px;
+    max-width: 500px;
+  }
+  .login_left > h1 {
+    color: #de5c8e;
+    font-size: 30px;
+  }
+  .login_left > p {
+    font-size: 15px;
+    max-width: 300px;
+  }
+  .login_right {
+    width: 50vw;
+    height: fit-content;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 30px;
+  }
+  .login_boxDefault > .MuiTextField-root {
+    margin: 5px 0px;
+    border-radius: 5px;
+    font-size: 20px;
+  }
+  .login_boxDefault > button {
+    padding: 5px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    border: 1px solid #c4c4c4;
+    background-color: #de5c8e;
+    color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .login_boxProvider > button {
+    padding: 10px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    border: 1px solid #c4c4c4;
+    background-color: white;
+    color: black;
+    font-family: "Rubik";
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .login_boxProvider > button > span {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .login_boxProvider > button > span > img {
+    height: 30px;
+  }
+  .login_boxProvider > button > span > p {
+    flex: 0.9;
+    justify-content: center;
+    font-size: 15px;
+  }
+  /* Register button */
+  .login_box > button {
+    padding: 10px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    border: 1px solid #c4c4c4;
+    background-color: #43c506;
+    color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 15px;
+    cursor: pointer;
+  }
+}
+/* Small (Mobile) */
+@media screen and (max-width: 414px) {
+  .login_left > h1 {
+    color: #de5c8e;
+    font-size: 30px;
+  }
+  .login_left > p {
+    font-size: 15px;
+    max-width: 250px;
+  }
+  .login_right {
+    width: 70vw;
+    height: fit-content;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 30px;
+  }
+}
