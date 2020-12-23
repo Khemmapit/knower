@@ -3,13 +3,31 @@ import React, { useState } from 'react';
 import "./Login.css";
 import {auth,googleProvider,facebookProvider} from "../../firebase"; 
 import Register from "./Register";
+import { useDispatch } from 'react-redux';
+import { login } from './userSlice';
 
 const Login = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const dispatch = useDispatch();
 
-    const signInWithEmail = () => {
+    const signInWithEmail = (event) => {
         // Login with email and password
+        event.preventDefault();
+        auth.signInWithEmailAndPassword(email,password)
+        .then(userAuth => {
+            console.log(userAuth);
+            if (userAuth.user.emailVerified) {
+                dispatch(login({
+                    email:userAuth.user.email,
+                    uid:userAuth.user.uid,
+                    displayName:userAuth.user.displayName,
+                    photoUrl:userAuth.user.photoURL,
+                }));
+            }else {
+                alert(`Please verify your email : ${userAuth.user.email}`)
+            }
+        })
     };
 
     const signInWithGoogle = () => {
@@ -48,7 +66,7 @@ const Login = () => {
                     </div>
                     <p>ลืมรหัสผ่าน ?</p>
                     <div className="login_boxProvider">
-                        <button onClick={signInWithGoogle} >
+                        <button onClick={signInWithGoogle}>
                             <span>
                                 <img src="https://i.pinimg.com/originals/39/21/6d/39216d73519bca962bd4a01f3e8f4a4b.png"/>
                                 <p>เข้าสู่ระบบด้วย Google</p>

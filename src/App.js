@@ -18,7 +18,8 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
-      if (authUser) {
+      if (authUser.emailVerified) {
+        console.log(authUser);
         dispatch(login({
           uid: authUser.uid,
           photo: authUser.photoURL,

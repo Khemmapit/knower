@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
 import "./Register.css";
 import { FormControl, FormControlLabel, FormLabel, IconButton, InputLabel, MenuItem, Radio, RadioGroup, Select } from '@material-ui/core';
+import {auth} from "../../firebase";
 
 export default function Register() {
   {/* Register popup state */}
@@ -19,17 +20,28 @@ export default function Register() {
     setOpen(false);
   };
   const submitRegister = () => {
-      console.log("first:",name,lastName,email,password);
-      console.log("second:",day,month,year,gender);  
-      setOpen(false);
-      setName("");setLastName("");setEmail("");setPassword("");
-      setDay(1);setMonth("มกราคม");setYear("2020");setGender("หญิง");
+      if (name=="" || lastName=="" || email=="" || password=="") {
+        return alert("กรุณาเติมข้อมูลในช่องว่างให้ครบ")
+      }else {
+        auth.createUserWithEmailAndPassword(email,password)
+        .then(userAuth => {
+          userAuth.user.updateProfile({
+            displayName:name+" "+lastName,
+          });
+          userAuth.user.sendEmailVerification()
+          .then(() => {
+              console.log("Email verification was sent !")
+          }).catch( error => alert(error.message))
+        }).catch(error => alert(error.message));
+        
+      }
   }
   {/* Information state */}
   const [name,setName] = useState("");
   const [lastName,setLastName] = useState("");
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
+  const [purpose,setPurpose] = useState(""); 
   {/* Birth Date state */}
   const [day,setDay] = useState(1);
   const [openDay,setOpenDay] = useState(false);
@@ -51,7 +63,7 @@ export default function Register() {
       <Button className="register__button" onClick={handleClickOpen} >
         สมัครสมาชิก
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
         <CloseIcon className="closeIcon" onClick={handleClose} />
         <DialogTitle id="register-form">สมัครสมาชิก</DialogTitle>
         <DialogContent>
@@ -90,6 +102,14 @@ export default function Register() {
             fullWidth
             value={password}
             onChange={event => setPassword(event.target.value)}
+          />
+          <TextField
+            margin="dense"
+            label="เป้าหมายในชีวิต (ตัวเลือก) "
+            type="text"
+            fullWidth
+            value={purpose}
+            onChange={event => setPurpose(event.target.value)}
           />
           {/* Birth Date */}
           <p className="birth_date_label">วันเกิด</p>
@@ -159,7 +179,6 @@ export default function Register() {
             </FormControl>
           </div>
         </DialogContent>
-
         <DialogActions>
           <Button onClick={submitRegister}>
             สมัครสมาชิก
