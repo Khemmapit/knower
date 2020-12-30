@@ -11,10 +11,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from './features/login/userSlice';
 import Login from './features/login/Login';
 import Header from "./features/header/Header";
+import Profile from './features/profile/Profile';
+import { choose_profile, selectProfile } from './features/profile/profileSlice';
+import Feed from "./features/feed/Feed";
+import SearchResult from './features/searchResult/SearchResult';
+import { selectSearch } from './features/searchResult/searchSlice';
 
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const profile = useSelector(selectProfile);
+  const search = useSelector(selectSearch);
 
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
@@ -22,7 +29,7 @@ function App() {
         console.log(authUser);
         dispatch(login({
           uid: authUser.uid,
-          photo: authUser.photoURL,
+          photoURL: authUser.photoURL,
           email: authUser.email,
           displayName: authUser.displayName
         }))
@@ -37,17 +44,31 @@ function App() {
       {user ? (
         <Router>
           <Switch>
-            <Route path="/" >
-              <Header />
-              
-              <h1>Knower User photo</h1>
-              <img src={user.photo} />
-            </Route>
-            {/* Feed */}
 
             {/* SearchResult */}
+            <Route path={`/search:${search?.hashtag}`}>
+              <Header />
+              <div className="app__body">
+                <SearchResult />
+              </div>
+            </Route>
 
             {/* Profile */}
+            <Route path={`/profile:${profile?.email}`}  >
+              <Header />
+              <div className="app__body">
+                <Profile />
+              </div>
+            </Route>
+
+            {/* Feed */}
+            <Route path="/" >
+              <Header/>
+              <div className="app__body">
+                <Feed />
+              </div>
+            </Route>
+
           </Switch>
         </Router>
       )

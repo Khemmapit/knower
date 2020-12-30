@@ -36,18 +36,6 @@
   display: flex;
   flex-direction: column;
 }
-/* .login_boxDefault > input {
-  padding: 10px;
-  margin: 5px 0px;
-  border: 1px solid #c4c4c4;
-  border-radius: 5px;
-  font-size: 20px;
-}
-.login_boxDefault > input:focus {
-  border: 1px solid #de5c8e;
-  outline-width: 0;
-  box-shadow: 0 0 3px 1px rgba(222, 92, 142, 0.25);
-} */
 .login_boxDefault > .MuiTextField-root {
   margin: 5px 0px;
   border-radius: 5px;
@@ -68,7 +56,7 @@
   background-color: gainsboro;
   color: #de5c8e;
 }
-/* ลืมรหัสผ่านหรอ ? */
+/* ลืมรหัสผ่าน ? */
 .login_box > p {
   color: #de5c8e;
   cursor: pointer;

@@ -1,0 +1,138 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  justify-content: center;
+}
+.profile__top {
+  display: flex;
+  border-bottom: 2px solid #c4c4c4;
+  justify-content: center;
+  max-width: 900px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.profile__topLeft {
+  padding: 30px;
+}
+.profile__topLeft > .MuiAvatar-root {
+  height: 100px;
+  width: 100px;
+}
+.profile__topRight > h1 {
+  margin: 0px 10px;
+}
+.user__network {
+  display: flex;
+}
+.user__network > p {
+  padding: 8px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin: 10px 10px;
+}
+.profile__topRight {
+  padding: 10px;
+}
+.profile__topRight > p {
+  margin: 0px 10px;
+}
+.bottom__header {
+  display: flex;
+  justify-content: center;
+}
+.bottom__header > h2 {
+  margin: 0px 30px;
+}
+.bottom__header > h2 > hr {
+  border: 1px solid #c4c4c4;
+  background-color: #c4c4c4;
+}
+.header__content {
+  cursor: pointer;
+  color: #de5c8e;
+}
+.header__content:hover {
+  color: #c4c4c4;
+}
+.header__collection {
+  cursor: pointer;
+  color: #de5c8e;
+}
+.header__collection:hover {
+  color: #c4c4c4;
+}
+.bottom__body {
+  margin: 10px;
+  width: 80vw;
+}
+.video__contentList {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  padding: 20px 0px;
+}
+.content__topic {
+  padding: 20px 0px;
+  border-radius: 50px;
+  padding: 30px;
+  margin: 10px 0px;
+}
+.content__topic > h3 {
+  font-size: 30px;
+  cursor: pointer;
+}
+.content__topic > h3:hover {
+  color: #de5c8e;
+  text-decoration: underline lightgray;
+}
+.collection {
+  display: flex;
+  flex-direction: column;
+}
+.collection__search {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 40%;
+  padding: 10px;
+  background-color: white;
+  color: #de5c8e;
+  border: 1px solid #de5c8e;
+  border-radius: 50px;
+}
+.collection__search > input {
+  border: none;
+  background-color: transparent;
+  padding: 10px;
+  color: #de5c8e;
+  outline-width: 0;
+}
+.collection__search > button {
+  display: none;
+}
+
+/* Medium */
+@media screen and (max-width: 860px) {
+  .profile__top {
+    display: flex;
+    border-bottom: 2px solid #c4c4c4;
+    justify-content: center;
+    max-width: 500px;
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  .profile__topRight > h1 {
+    font-size: 25px;
+  }
+  .profile__topRight > p {
+    font-size: 15px;
+  }
+  .user__network > p {
+    padding: 8px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 10px 10px;
+    font-size: 13px;
+  }
+}

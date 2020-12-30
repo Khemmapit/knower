@@ -1,0 +1,23 @@
+.feed {
+  padding-bottom: 10px;
+}
+.addContent__icon {
+  background-color: #de5c8e;
+  border-radius: 100px;
+  color: white;
+  margin-left: 100px;
+  cursor: pointer;
+  border-radius: 100px;
+  background-color: #de5c8e;
+  position: fixed;
+  right: 50px;
+  z-index: 1000;
+  padding: 10px;
+  border: 1px solid lightgray;
+  box-shadow: 2px 3px 7px 0px rgba(0, 0, 0, 0.75);
+}
+.addContent__icon:hover {
+  background-color: #f9f9f9;
+  color: #de5c8e;
+  border: 1px solid #de5c8e;
+}

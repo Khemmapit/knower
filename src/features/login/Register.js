@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
 import "./Register.css";
 import { FormControl, FormControlLabel, FormLabel, IconButton, InputLabel, MenuItem, Radio, RadioGroup, Select } from '@material-ui/core';
-import {auth} from "../../firebase";
+import db,{auth} from "../../firebase";
 
 export default function Register() {
   {/* Register popup state */}
@@ -31,9 +31,17 @@ export default function Register() {
           userAuth.user.sendEmailVerification()
           .then(() => {
               console.log("Email verification was sent !")
-          }).catch( error => alert(error.message))
+          }).catch( error => alert(error.message));
+          db.collection("user").doc(userAuth.email).set({
+              content:0,
+              displayName:userAuth.displayName,
+              email:userAuth.email,
+              follower:0,
+              following:0,
+              photoURL:userAuth.photoURL,
+              uid:userAuth.uid,
+          })
         }).catch(error => alert(error.message));
-        
       }
   }
   {/* Information state */}

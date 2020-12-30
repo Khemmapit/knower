@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import "./Login.css";
 import {auth,googleProvider,facebookProvider} from "../../firebase"; 
 import Register from "./Register";
+import db from "../../firebase";
 import { useDispatch } from 'react-redux';
 import { login } from './userSlice';
 
@@ -22,23 +23,62 @@ const Login = () => {
                     email:userAuth.user.email,
                     uid:userAuth.user.uid,
                     displayName:userAuth.user.displayName,
-                    photoUrl:userAuth.user.photoURL,
+                    photoURL:userAuth.user.photoURL,
                 }));
             }else {
                 alert(`Please verify your email : ${userAuth.user.email}`)
             }
         })
     };
+    const addNewUserToDB = (user) => {
+        console.log("get into db!")
+        // This function try to add new user data to databases at "user" collection
+        const userEmail = [];
+        db.collection("user").get().then(snapshot => snapshot.forEach(doc => userEmail.push(doc.data().email) ));
+        console.log(user);
+        console.log(userEmail);
+        const check = userEmail.find(element => element==user.email);
+        if (!check) {
+            console.log("get in",userEmail);
+            db.collection("user").doc(user.email).set({
+                content:0,
+                displayName:user.displayName,
+                email:user.email,
+                follower:0,
+                following:0,
+                photoURL:user.photoURL,
+                uid:user.uid,
+            })
+        } 
+    };
 
     const signInWithGoogle = () => {
         //Login with Google 
         auth.signInWithPopup(googleProvider)
+        .then( ({user}) => {
+            dispatch(login({
+                uid: user.uid,
+                photoURL: user.photoURL,
+                email: user.email,
+                displayName: user.displayName
+            }));    
+            addNewUserToDB(user);
+        })
         .catch(error => alert(error.message))
     };
 
     const signInWithFacebook = () => {
         //Login with Facebook
         auth.signInWithPopup(facebookProvider)
+        .then( ({user}) => {
+            dispatch(login({
+                uid: user.uid,
+                photoURL: user.photoURL,
+                email: user.email,
+                displayName: user.displayName
+            }));    
+            addNewUserToDB(user);   
+        })
         .catch(error => alert(error.message))
     };
 
