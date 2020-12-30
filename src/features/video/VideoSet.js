@@ -4,9 +4,14 @@ import "./VideoSet.css";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import Tooltip from '@material-ui/core/Tooltip';
+import { useDispatch } from 'react-redux';
+import { user_search } from '../searchResult/searchSlice';
+import { useHistory } from 'react-router-dom';
 
 const VideoSet = ({hashtag}) => {
 
+    const dispatch = useDispatch();
+    const history = useHistory();
     const navigateNext = () => {
         //click to go to the next right post
         alert("swipe right")
@@ -15,12 +20,20 @@ const VideoSet = ({hashtag}) => {
         //click to go to the next left post
         alert("swipe left")
     }
+    const goToSearch = (hash) => {
+        dispatch(user_search({
+            hashtag:hash,
+        }));
+        history.replace(`/search:${hash}`);   
+    }
 
     return (
         <div className="videoset">
             <div className="hashtag__set">
                 {hashtag.map(hash => (
-                    <p className="hashtag">
+                    <p className="hashtag"
+                        onClick={ () => goToSearch(hash)}
+                    >
                         #{hash}
                     </p>
                 ))}

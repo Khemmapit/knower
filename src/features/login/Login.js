@@ -30,17 +30,15 @@ const Login = () => {
             }
         })
     };
+    
     const addNewUserToDB = (user) => {
-        console.log("get into db!")
         // This function try to add new user data to databases at "user" collection
         const userEmail = [];
         db.collection("user").get().then(snapshot => snapshot.forEach(doc => userEmail.push(doc.data().email) ));
-        console.log(user);
-        console.log(userEmail);
         const check = userEmail.find(element => element==user.email);
         if (!check) {
             console.log("get in",userEmail);
-            db.collection("user").doc(user.email).set({
+            db.collection("user").doc(user.email).update({
                 content:0,
                 displayName:user.displayName,
                 email:user.email,

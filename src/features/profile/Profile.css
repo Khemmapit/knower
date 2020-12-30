@@ -4,6 +4,7 @@
   width: 100vw;
   justify-content: center;
 }
+
 .profile__top {
   display: flex;
   border-bottom: 2px solid #c4c4c4;

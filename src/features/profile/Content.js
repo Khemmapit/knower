@@ -5,10 +5,14 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
+import { useHistory } from 'react-router-dom';
+import { user_search } from '../searchResult/searchSlice';
+import { useDispatch } from 'react-redux';
 
 const Content = ({url,description,hashtag}) => {
     const [getIt,setGetIt] = useState(false);
-    
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const handelGetIt = () => {
         if (getIt) {
@@ -18,12 +22,22 @@ const Content = ({url,description,hashtag}) => {
         }
     }
     
+    
+    const goToSearch = (hash) => {
+        dispatch(user_search({
+            hashtag:hash,
+        }));
+        history.replace(`/search:${hash}`);   
+    }
 
     return (
         <div className="subcontent" >
             <div className="subcontent__hashtag">
                 {hashtag.map(hash => (
-                    <p>#{hash}</p>
+                    <p
+                        onClick={() => goToSearch(hash)}
+                    >#{hash}
+                    </p>
                 ))}
             </div>
             <div className="subcontent__video">

@@ -11,7 +11,6 @@ import { user_search } from '../searchResult/searchSlice';
 const PostHeader = ({username,photoURL,hashtag,email}) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [hashText,setHashText] = useState("");
 
     const handleSearch = (hash) => {
         dispatch(user_search({
