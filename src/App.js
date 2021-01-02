@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
-import './App.css';
+import React, { useEffect } from "react";
+import "./App.css";
 import { auth } from "./firebase";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, logout, selectUser } from './features/login/userSlice';
-import Login from './features/login/Login';
+import { login, logout, selectUser } from "./features/login/userSlice";
+import Login from "./features/login/Login";
 import Header from "./features/header/Header";
 
 function App() {
@@ -17,18 +12,20 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    auth.onAuthStateChanged(authUser => {
+    auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        dispatch(login({
-          uid: authUser.uid,
-          photo: authUser.photoURL,
-          email: authUser.email,
-          displayName: authUser.displayName
-        }))
+        dispatch(
+          login({
+            uid: authUser.uid,
+            photo: authUser.photoURL,
+            email: authUser.email,
+            displayName: authUser.displayName,
+          })
+        );
       } else {
-        dispatch(logout())
+        dispatch(logout());
       }
-    })
+    });
   }, []);
 
   return (
@@ -36,9 +33,9 @@ function App() {
       {user ? (
         <Router>
           <Switch>
-            <Route path="/" >
+            <Route path="/">
               <Header />
-              
+
               <h1>Knower User photo</h1>
               <img src={user.photo} />
             </Route>
@@ -49,12 +46,9 @@ function App() {
             {/* Profile */}
           </Switch>
         </Router>
-      )
-        : (
-          <Login />
-        )
-      }
-
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }
