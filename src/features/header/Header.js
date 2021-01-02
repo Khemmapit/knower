@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { choose_profile } from "../profile/profileSlice";
 import { selectSearch, user_search } from "../searchResult/searchSlice";
+import { auth } from "../../firebase";
 
 const Header = () => {
   const [input, setInput] = useState("");
@@ -26,9 +27,17 @@ const Header = () => {
     setAnchorEl(null);
   };
   const handleLogout = () => {
-    setAnchorEl(null);
-    dispatch(logout());
-    history.replace("/");
+    auth
+      .signOut()
+      .then(() => {
+        setAnchorEl(null);
+        dispatch(logout());
+        history.replace("/");
+      })
+      .then()
+      .catch((error) => {
+        throw error;
+      });
   };
   const handleProfile = () => {
     dispatch(
