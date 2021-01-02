@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./Header.css";
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -109,4 +109,29 @@ const Header = () => {
     )
 }
 
-export default Header
+  return (
+    <div className="header">
+      <h1>Knower</h1>
+      <div className="header_search">
+        <SearchIcon />
+        <input
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+          placeholder="search"
+        />
+      </div>
+      <MenuIcon onClick={handleClick} />
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      </Menu>
+    </div>
+  );
+};
+
+export default Header;

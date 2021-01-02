@@ -1,7 +1,7 @@
-import { Button, TextField } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Button, TextField } from "@material-ui/core";
+import React, { useState } from "react";
 import "./Login.css";
-import {auth,googleProvider,facebookProvider} from "../../firebase"; 
+import { auth, googleProvider, facebookProvider } from "../../firebase";
 import Register from "./Register";
 import db from "../../firebase";
 import { useDispatch } from 'react-redux';
@@ -122,7 +122,9 @@ const Login = () => {
                 </div>
             </div>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default Login
+export default Login;
