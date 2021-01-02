@@ -1,0 +1,10 @@
+.searchVideoSet {
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+  scroll-snap-type: x mandatory;
+  padding: 10px;
+}
+.searchVideoSet__post {
+  scroll-snap-align: start;
+}

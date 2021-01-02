@@ -1,0 +1,64 @@
+.videoset {
+  margin: 30px 0px;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  justify-content: center;
+}
+.hashtag__set {
+  display: flex;
+  margin-top: 10px;
+}
+.hashtag {
+  margin-right: 10px;
+  color: #d35c8e;
+  font-size: 20px;
+  cursor: pointer;
+}
+.hashtag:hover {
+  text-decoration: underline #c4c4c4;
+}
+.post__set {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  padding-right: 300px;
+  position: relative;
+}
+.subpost__set {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 90vw;
+  margin-right: 100px;
+  scroll-snap-align: end start;
+}
+.next__icon {
+  color: #d35c8e;
+  border-radius: 100px;
+  margin-left: -400px;
+  cursor: pointer;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #d35c8e;
+}
+.next__icon:hover {
+  color: white;
+  background-color: #d35c8e;
+}
+.before__icon {
+  margin-right: -400px;
+  cursor: pointer;
+  color: #d35c8e;
+  border: 1px solid #d35c8e;
+  border-radius: 100px;
+  padding: 15px;
+  background-color: white;
+}
+.before__icon:hover {
+  color: white;
+  background-color: #d35c8e;
+}

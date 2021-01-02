@@ -1,0 +1,36 @@
+.subcontent {
+  display: flex;
+  flex-direction: column;
+  margin-right: 200px;
+  scroll-snap-align: start;
+  border: 1px solid lightgray;
+  position: relative;
+  width: 50vw;
+  padding: 10px 50px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 3px 3px 7px -5px rgba(0, 0, 0, 0.75);
+}
+.subcontent__description {
+  display: flex;
+  padding: 10px;
+}
+.subcontent__hashtag {
+  display: flex;
+  padding: 10px 0px;
+  width: 100%;
+  margin: 10px 0px;
+  border-bottom: 1px solid lightgray;
+}
+.subcontent__hashtag > p {
+  margin-right: 10px;
+  color: #de5c8e;
+  cursor: pointer;
+}
+.subcontent__hashtag > p:hover {
+  text-decoration: underline lightgray;
+}
+.subcontent__video {
+  width: 100%;
+  text-align: center;
+}

@@ -1,51 +1,101 @@
 ::placeholder {
-  color: white;
+  color: #de5c8e;
   opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: white;
+  color: #de5c8e;
 }
 
 ::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: white;
+  color: #de5c8e;
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #de5c8e;
-  color: white;
-  padding: 10px;
+  background-color: white;
+  padding: 10px 10px;
+  width: 100%;
+  border-bottom: 0.1px solid lightgray;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 .header > h1 {
-  color: white;
+  color: #de5c8e;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.header > h1:hover {
+  color: #ee5c8e;
+  cursor: pointer;
 }
 .header_search {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40%;
-}
-.header_search {
-  border: 1px solid #c4c4c4;
+  border: 1px solid #de5c8e;
   padding: 10px;
   border-radius: 50px;
   justify-content: start;
-  color: white;
+  color: #de5c8e;
+  display: flex;
 }
-.header_search > input {
+.header_search > form {
+  display: flex;
+  flex: 1;
+}
+.header_search > form > input {
   background-color: transparent;
   border: none;
-  color: white;
+  color: #de5c8e;
   outline-width: 0;
   font-size: 15px;
+  flex: 1;
+}
+.header_search > form > button {
+  display: none;
 }
 .header > .MuiSvgIcon-root {
-  border: 1px solid #c4c4c4;
+  border: 1px solid #de5c8e;
   border-radius: 10px;
   padding: 10px;
+  color: #de5c8e;
   cursor: pointer;
+  margin-right: 10px;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  position: relative;
+}
+.menus {
+  max-width: 300px;
+}
+/* Medium */
+@media screen and (max-width: 860px) {
+  .header > h1 {
+    color: #de5c8e;
+    font-size: 25px;
+  }
+  .header > h1:hover {
+    color: #ee5c8e;
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 414px) {
+  .header > h1 {
+    color: #de5c8e;
+    font-size: 20px;
+  }
+  .header > h1:hover {
+    color: #ee5c8e;
+    cursor: pointer;
+  }
 }

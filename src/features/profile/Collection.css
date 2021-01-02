@@ -1,0 +1,18 @@
+.profile__collection {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+.profile__collection > h3 {
+  font-size: 30px;
+  margin: 10px 0px;
+}
+.collection__contentList {
+  display: flex;
+  overflow-x: scroll;
+  padding: 20px 0px;
+  scroll-snap-type: x mandatory;
+}
+.subcollection__post {
+  scroll-snap-align: start;
+}
