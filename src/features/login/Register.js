@@ -11,7 +11,6 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
-  IconButton,
   InputLabel,
   MenuItem,
   Radio,
@@ -204,8 +203,10 @@ export default function Register() {
                 value={day}
                 onChange={(event) => setDay(event.target.value)}
               >
-                {days.map((d) => (
-                  <MenuItem value={d}>{d}</MenuItem>
+                {days.map((d, index) => (
+                  <MenuItem key={index} value={d}>
+                    {d}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -221,8 +222,10 @@ export default function Register() {
                 value={month}
                 onChange={(event) => setMonth(event.target.value)}
               >
-                {months.map((m) => (
-                  <MenuItem value={m}>{m}</MenuItem>
+                {months.map((m, index) => (
+                  <MenuItem key={index} value={m}>
+                    {m}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -238,8 +241,10 @@ export default function Register() {
                 value={year}
                 onChange={(event) => setYear(event.target.value)}
               >
-                {years.map((y) => (
-                  <MenuItem value={y}>{y}</MenuItem>
+                {years.map((y, index) => (
+                  <MenuItem key={index} value={y}>
+                    {y}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>

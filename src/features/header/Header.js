@@ -8,8 +8,7 @@ import { logout, selectUser } from "../login/userSlice";
 import { Avatar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { choose_profile } from "../profile/profileSlice";
-import { selectSearch, user_search } from "../searchResult/searchSlice";
+import { chooseProfile } from "../profile/profileSlice";
 import { auth } from "../../firebase";
 
 const Header = () => {
@@ -18,7 +17,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(selectUser);
-  const search = useSelector(selectSearch);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -41,7 +39,7 @@ const Header = () => {
   };
   const handleProfile = () => {
     dispatch(
-      choose_profile({
+      chooseProfile({
         uid: user.uid,
         photoURL: user.photoURL,
         email: user.email,

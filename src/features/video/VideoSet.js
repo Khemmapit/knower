@@ -5,8 +5,9 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useDispatch } from "react-redux";
-import { user_search } from "../searchResult/searchSlice";
+import { userSearch } from "../searchResult/searchSlice";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const VideoSet = ({ hashtag }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const VideoSet = ({ hashtag }) => {
   };
   const goToSearch = (hash) => {
     dispatch(
-      user_search({
+      userSearch({
         hashtag: hash,
       })
     );
@@ -154,6 +155,10 @@ const VideoSet = ({ hashtag }) => {
       </div>
     </div>
   );
+};
+
+VideoSet.propTypes = {
+  hashtag: PropTypes.array,
 };
 
 export default VideoSet;

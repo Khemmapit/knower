@@ -6,12 +6,12 @@ export const searchSlice = createSlice({
     search: null,
   },
   reducers: {
-    user_search: (state, action) => {
+    userSearch: (state, action) => {
       state.search = action.payload;
     },
   },
 });
 
-export const { user_search } = searchSlice.actions;
+export const { userSearch } = searchSlice.actions;
 export const selectSearch = (state) => state.search.search;
 export default searchSlice.reducer;

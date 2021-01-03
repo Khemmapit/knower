@@ -1,7 +1,7 @@
 import React from "react";
 import Post from "../post/Post";
 import "./Collection.css";
-import Content from "./Content";
+import PropTypes from "prop-types";
 
 const Collection = ({ name }) => {
   return (
@@ -54,4 +54,7 @@ const Collection = ({ name }) => {
   );
 };
 
+Collection.propTypes = {
+  name: PropTypes.string,
+};
 export default Collection;

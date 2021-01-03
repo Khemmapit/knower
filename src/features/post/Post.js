@@ -3,8 +3,7 @@ import "./Post.css";
 import PostHeader from "./PostHeader";
 import PostFooter from "./PostFooter";
 import PostBody from "./PostBody";
-import { useDispatch } from "react-redux";
-import { user_search } from "../searchResult/searchSlice";
+import PropTypes from "prop-types";
 
 const Post = ({ username, photoURL, description, email, hashtag }) => {
   return (
@@ -29,6 +28,14 @@ const Post = ({ username, photoURL, description, email, hashtag }) => {
       />
     </div>
   );
+};
+
+Post.propTypes = {
+  username: PropTypes.string,
+  photoURL: PropTypes.string,
+  description: PropTypes.string,
+  email: PropTypes.string,
+  hashtag: PropTypes.array,
 };
 
 export default Post;

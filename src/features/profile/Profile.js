@@ -19,7 +19,7 @@ import Collection from "./Collection";
 import SearchIcon from "@material-ui/icons/Search";
 import { selectUser } from "../login/userSlice";
 import { useHistory } from "react-router-dom";
-import { user_search } from "../searchResult/searchSlice";
+
 const Profile = () => {
   // other tools
   const dispatch = useDispatch();
@@ -30,14 +30,10 @@ const Profile = () => {
   const profile = useSelector(selectProfile);
   const [userData, setUserData] = useState({});
   const [bottomBody, setBottomBody] = useState("content");
-  const [setOfContent, setSetOfContent] = useState([
-    "climatechange",
-    "startup",
-    "technology",
-  ]);
+  const [setOfContent] = useState(["climatechange", "startup", "technology"]);
   // state to dynamic data
-  const [editData, setEditData] = useState({});
-  const [openEdit, setOpenEdit] = useState(false); // this state for control edit user data
+  const [openEdit, setOpenEdit] = useState(false);
+  // this state for control edit user data
   const [description, setDescription] = useState("");
   const [change, setChange] = useState(true);
 
@@ -156,8 +152,8 @@ const Profile = () => {
           {userData.email === user.email ? (
             bottomBody === "content" ? (
               <div className="content">
-                {setOfContent.map((hashtag) => (
-                  <div className="content__topic">
+                {setOfContent.map((hashtag, index) => (
+                  <div key={index} className="content__topic">
                     <h3 onClick={() => goToSearch(hashtag)}>#{hashtag}</h3>
                     <div className="video__contentList">
                       <Content
@@ -229,8 +225,8 @@ const Profile = () => {
             )
           ) : (
             <div className="content">
-              {setOfContent.map((hashtag) => (
-                <div className="content__topic">
+              {setOfContent.map((hashtag, index) => (
+                <div key={index} className="content__topic">
                   <h3 onClick={() => goToSearch(hashtag)}>#{hashtag}</h3>
                   <div className="video__contentList">
                     <Content
@@ -290,62 +286,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-{
-  /* <div className="content">
-                                <div className="content__topic">
-                                    <h3>#climatechange</h3>
-                                    <div className="video__contentList">
-                                        <Content url=""
-                                            description="the world nedd us for help !"
-                                            hashtag={["environment","climatechange","greenhousegases"]}
-                                        />
-                                        <Content url=""
-                                            description="the world nedd us for help !"
-                                            hashtag={["environment","climatechange","greenhousegases"]}
-                                        />
-                                        <Content url=""
-                                            description="the world nedd us for help !"
-                                            hashtag={["environment","climatechange","greenhousegases"]}
-                                        />
-                                        <Content url=""
-                                            description="the world nedd us for help !"
-                                            hashtag={["environment","climatechange","greenhousegases"]}
-                                        />
-                                        <Content url=""
-                                            description="the world nedd us for help !"
-                                            hashtag={["environment","climatechange","greenhousegases"]}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="content__topic">
-                                    <h3>#startup</h3>
-                                    <div className="video__contentList">
-                                        <Content url=""
-                                            description="the world need startup for help other people's life better !"
-                                            hashtag={["business","startup","technology"]}
-                                        />
-                                        <Content url=""
-                                            description="the world need startup for help other people's life better !"
-                                            hashtag={["business","startup","technology"]}
-                                        />
-                                        <Content url=""
-                                            description="the world need startup for help other people's life better !"
-                                            hashtag={["business","startup","technology"]}
-                                        />
-                                        <Content url=""
-                                            description="the world need startup for help other people's life better !"
-                                            hashtag={["business","startup","technology"]}
-                                        />
-                                        <Content url=""
-                                            description="the world need startup for help other people's life better !"
-                                            hashtag={["business","startup","technology"]}
-                                        />
-                                        <Content url=""
-                                            description="the world need startup for help other people's life better !"
-                                            hashtag={["business","startup","technology"]}
-                                        />
-                                    </div>
-                                </div>
-                            </div> */
-}

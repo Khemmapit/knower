@@ -44,7 +44,8 @@
     "eslint-plugin-react": "^7.22.0",
     "husky": ">=4",
     "lint-staged": ">=10",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "prop-types": "^15.7.2"
   },
   "husky": {
     "hooks": {
@@ -52,6 +53,9 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,md}": "prettier --write"
+    "*.{js,css,md}": [
+      "yarn eslint --fix",
+      "yarn prettier --write"
+    ]
   }
 }

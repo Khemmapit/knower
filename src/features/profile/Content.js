@@ -6,8 +6,9 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CommentOutlinedIcon from "@material-ui/icons/CommentOutlined";
 import LibraryAddOutlinedIcon from "@material-ui/icons/LibraryAddOutlined";
 import { useHistory } from "react-router-dom";
-import { user_search } from "../searchResult/searchSlice";
+import { userSearch } from "../searchResult/searchSlice";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
 const Content = ({ url, description, hashtag }) => {
   const [getIt, setGetIt] = useState(false);
@@ -24,7 +25,7 @@ const Content = ({ url, description, hashtag }) => {
 
   const goToSearch = (hash) => {
     dispatch(
-      user_search({
+      userSearch({
         hashtag: hash,
       })
     );
@@ -34,8 +35,10 @@ const Content = ({ url, description, hashtag }) => {
   return (
     <div className="subcontent">
       <div className="subcontent__hashtag">
-        {hashtag.map((hash) => (
-          <p onClick={() => goToSearch(hash)}>#{hash}</p>
+        {hashtag.map((hash, index) => (
+          <p key={index} onClick={() => goToSearch(hash)}>
+            #{hash}
+          </p>
         ))}
       </div>
       <div className="subcontent__video">
@@ -64,6 +67,12 @@ const Content = ({ url, description, hashtag }) => {
       </div>
     </div>
   );
+};
+
+Content.propTypes = {
+  url: PropTypes.string,
+  description: PropTypes.string,
+  hashtag: PropTypes.array,
 };
 
 export default Content;

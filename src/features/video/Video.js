@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./Video.css";
+import PropTypes from "prop-types";
+
 const Video = ({ url }) => {
   const [play, setPlay] = useState(false);
   const videoRef = useRef(null);
@@ -27,4 +29,7 @@ const Video = ({ url }) => {
   );
 };
 
+Video.propTypes = {
+  url: PropTypes.string,
+};
 export default Video;

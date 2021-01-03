@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { auth } from "./firebase";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/login/userSlice";
 import Login from "./features/login/Login";
 import Header from "./features/header/Header";
 import Profile from "./features/profile/Profile";
-import { choose_profile, selectProfile } from "./features/profile/profileSlice";
+import { selectProfile } from "./features/profile/profileSlice";
 import Feed from "./features/feed/Feed";
 import SearchResult from "./features/searchResult/SearchResult";
 import { selectSearch } from "./features/searchResult/searchSlice";
