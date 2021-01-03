@@ -1,12 +1,12 @@
 import { Avatar, IconButton } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import "./PostHeader.css";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../login/userSlice";
-import { choose_profile } from "../profile/profileSlice";
+import { useDispatch } from "react-redux";
+import { chooseProfile } from "../profile/profileSlice";
 import { useHistory } from "react-router-dom";
-import { user_search } from "../searchResult/searchSlice";
+import { userSearch } from "../searchResult/searchSlice";
+import PropTypes from "prop-types";
 
 const PostHeader = ({ username, photoURL, hashtag, email }) => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
 
   const handleSearch = (hash) => {
     dispatch(
-      user_search({
+      userSearch({
         hashtag: hash,
       })
     );
@@ -23,7 +23,7 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
 
   const goToProfile = () => {
     dispatch(
-      choose_profile({
+      chooseProfile({
         photoURL: photoURL,
         email: email,
         displayName: username,
@@ -57,4 +57,10 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
   );
 };
 
+PostHeader.propTypes = {
+  username: PropTypes.string,
+  photoURL: PropTypes.string,
+  email: PropTypes.string,
+  hashtag: PropTypes.array,
+};
 export default PostHeader;

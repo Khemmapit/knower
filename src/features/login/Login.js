@@ -56,7 +56,7 @@ const Login = () => {
   };
 
   const signInWithGoogle = () => {
-    //Login with Google
+    // Login with Google
     auth
       .signInWithPopup(googleProvider)
       .then(({ user }) => {
@@ -74,7 +74,7 @@ const Login = () => {
   };
 
   const signInWithFacebook = () => {
-    //Login with Facebook
+    // Login with Facebook
     auth
       .signInWithPopup(facebookProvider)
       .then(({ user }) => {

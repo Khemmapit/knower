@@ -94,7 +94,7 @@
 .collection__search {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   width: 40%;
   padding: 10px;
   background-color: white;

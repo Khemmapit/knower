@@ -41,7 +41,7 @@
   border: 1px solid #de5c8e;
   padding: 10px;
   border-radius: 50px;
-  justify-content: start;
+  justify-content: flex-start;
   color: #de5c8e;
   display: flex;
 }
