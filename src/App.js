@@ -21,6 +21,7 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
+      setLoading(false);
       if (authUser.emailVerified) {
         console.log(authUser);
         dispatch(
@@ -31,7 +32,6 @@ function App() {
             displayName: authUser.displayName,
           })
         );
-        setLoading(false);
       } else {
         dispatch(logout());
       }
