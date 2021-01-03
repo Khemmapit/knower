@@ -12,11 +12,11 @@ const VideoSet = ({ hashtag }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const navigateNext = () => {
-    //click to go to the next right post
+    // click to go to the next right post
     alert("swipe right");
   };
   const navigateBefore = () => {
-    //click to go to the next left post
+    // click to go to the next left post
     alert("swipe left");
   };
   const goToSearch = (hash) => {
