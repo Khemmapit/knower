@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { chooseProfile } from "../profile/profileSlice";
 import { auth } from "../../firebase";
+import { userSearch } from "../searchResult/searchSlice";
 
 const Header = () => {
   const [input, setInput] = useState("");
@@ -52,7 +53,7 @@ const Header = () => {
   const handleSearch = (event) => {
     event.preventDefault();
     dispatch(
-      user_search({
+      userSearch({
         hashtag: input,
       })
     );
@@ -63,7 +64,7 @@ const Header = () => {
     setInput("");
     history.replace("/");
     dispatch(
-      user_search({
+      userSearch({
         hashtag: null,
       })
     );

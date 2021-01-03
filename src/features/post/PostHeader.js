@@ -5,6 +5,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { useDispatch } from "react-redux";
 import { chooseProfile } from "../profile/profileSlice";
 import { useHistory } from "react-router-dom";
+import { userSearch } from "../searchResult/searchSlice";
 import PropTypes from "prop-types";
 
 const PostHeader = ({ username, photoURL, hashtag, email }) => {
@@ -13,7 +14,7 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
 
   const handleSearch = (hash) => {
     dispatch(
-      user_search({
+      userSearch({
         hashtag: hash,
       })
     );
