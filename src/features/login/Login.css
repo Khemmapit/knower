@@ -4,13 +4,25 @@
   align-items: center;
   justify-content: space-evenly;
   font-family: "Rubik";
+  overflow: scroll;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.login::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.login {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .login_left {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   height: 100vh;
-  padding: 10px;
+  padding: 30px;
   max-width: 500px;
 }
 .login_left > h1 {
@@ -118,7 +130,7 @@
   color: #43c506;
 }
 /* Medium */
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 960px) {
   .login {
     display: flex;
     flex-direction: column;
@@ -207,7 +219,7 @@
   }
 }
 /* Small (Mobile) */
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 600px) {
   .login_left > h1 {
     color: #de5c8e;
     font-size: 30px;

@@ -5,10 +5,10 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../login/userSlice";
 import { choose_profile } from "../profile/profileSlice";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { user_search } from "../searchResult/searchSlice";
 
-const PostHeader = ({ username, photoURL, hashtag, email }) => {
+const PostHeader = ({ username, photoURL, hashtag, email, uid }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -27,6 +27,7 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
         photoURL: photoURL,
         email: email,
         displayName: username,
+        uid: uid,
       })
     );
     history.replace(`/profile:${email}`);
@@ -36,9 +37,11 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
   return (
     <div className="postHeader">
       <div className="header__left">
-        <Avatar src={photoURL} onClick={goToProfile} />
+        <Link to={`/profile:${email}`}>
+          <Avatar src={photoURL} onClick={goToProfile} />
+        </Link>
         <div className="header__leftDescription">
-          <h3 onClick={goToProfile}>{username.split(" ")[0]}</h3>
+          <h3 onClick={goToProfile}>{username}</h3>
           <div className="description">
             {hashtag.map((hash, index) => (
               <small onClick={() => handleSearch(hash)} key={index}>

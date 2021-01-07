@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { logout, selectUser } from "../login/userSlice";
 import { Avatar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { choose_profile } from "../profile/profileSlice";
 import { selectSearch, user_search } from "../searchResult/searchSlice";
 import { auth } from "../../firebase";
@@ -60,7 +60,6 @@ const Header = () => {
     );
     history.replace(`/search:${input}`);
   };
-
   const handleKnower = () => {
     setInput("");
     history.replace("/");

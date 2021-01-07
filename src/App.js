@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { auth } from "./firebase";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/login/userSlice";
 import Login from "./features/login/Login";
@@ -23,7 +23,19 @@ function App() {
     auth.onAuthStateChanged((authUser) => {
       setLoading(false);
       if (authUser.emailVerified) {
-        console.log(authUser);
+        if (authUser.photoURL === null) {
+          console.log("get in photoURL");
+          authUser.updateProfile({
+            photoURL:
+              "https://qph.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd",
+          });
+        }
+        if (authUser.displayName === null) {
+          console.log("get in displayName");
+          authUser.updateProfile({
+            displayName: authUser.email.split("@")[0],
+          });
+        }
         dispatch(
           login({
             uid: authUser.uid,
@@ -39,6 +51,7 @@ function App() {
   }, []);
 
   if (loading) return <div>loading...</div>;
+
   return (
     <div className="app">
       {user ? (

@@ -17,11 +17,38 @@
   padding: 30px;
 }
 .profile__topLeft > .MuiAvatar-root {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
 }
 .profile__topRight > h1 {
   margin: 0px 10px;
+}
+.profile__topRight > h1 > .followButton {
+  color: white;
+  background-color: #de5c8e;
+  margin: 0px 10px;
+  border: 1px solid white;
+  text-transform: capitalize;
+}
+.profile__topRight > h1 > .followButton:hover {
+  color: #de5c8e;
+  background-color: white;
+}
+.profile__topRight > h1 > .followingButton {
+  color: #de5c8e;
+  background-color: white;
+  margin: 0px 10px;
+  border: 1px solid #c4c4c4;
+  text-transform: capitalize;
+}
+.profile__topRight > h1 > .followingButton:hover {
+  color: white;
+  background-color: #de5c8e;
+}
+.user__purpose {
+  color: #de5c8e;
+  font-size: 15px;
+  padding: 10px;
 }
 .user__network {
   display: flex;
@@ -31,6 +58,11 @@
   border: 1px solid lightgray;
   border-radius: 10px;
   margin: 10px 10px;
+  cursor: pointer;
+}
+.user__network > p:hover {
+  color: #f9f9f9;
+  background-color: #de5c8e;
 }
 .profile__topRight {
   padding: 10px;
@@ -49,6 +81,7 @@
   border: 1px solid #c4c4c4;
   background-color: #c4c4c4;
 }
+
 .header__content {
   cursor: pointer;
   color: #de5c8e;
@@ -112,9 +145,26 @@
 .collection__search > button {
   display: none;
 }
-
+.MuiDialogContent-root {
+  overflow-y: scroll;
+}
+.followerDialog__userInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.followerDialog__userInfo:hover {
+  background-color: #de5c8e;
+  color: white;
+  border-radius: 10px;
+}
+.followerDialog__userInfo > .MuiAvatar-root {
+  margin-right: 10px;
+}
 /* Medium */
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 960px) {
   .profile__top {
     display: flex;
     border-bottom: 2px solid #c4c4c4;
@@ -122,6 +172,10 @@
     max-width: 500px;
     margin-bottom: 20px;
     padding: 20px;
+  }
+  .profile__topLeft > .MuiAvatar-root {
+    height: 100px;
+    width: 100px;
   }
   .profile__topRight > h1 {
     font-size: 25px;
@@ -135,5 +189,13 @@
     border-radius: 10px;
     margin: 10px 10px;
     font-size: 13px;
+  }
+}
+
+/* Small */
+@media screen and (max-width: 600px) {
+  .profile__topLeft > .MuiAvatar-root {
+    height: 70px;
+    width: 70px;
   }
 }
