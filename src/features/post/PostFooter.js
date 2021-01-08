@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./PostFooter.css";
+//  import "./PostFooter.css";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CommentOutlinedIcon from "@material-ui/icons/CommentOutlined";
 import LibraryAddOutlinedIcon from "@material-ui/icons/LibraryAddOutlined";
@@ -8,8 +8,13 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import { useSelector } from "react-redux";
 import { selectUser } from "../login/userSlice";
 import PropTypes from "prop-types";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import indexStyle from "./indexStyle";
 
 const PostFooter = ({ description, get, recommend, collect }) => {
+  const styles = indexStyle();
   const [input, setInput] = useState("");
   const [getIt, setGetIt] = useState(false);
   const user = useSelector(selectUser);
@@ -37,63 +42,28 @@ const PostFooter = ({ description, get, recommend, collect }) => {
   };
 
   const handelGetIt = () => {
-    if (getIt) {
-      setGetIt(false);
-    } else {
-      setGetIt(true);
-    }
+    setGetIt(!getIt);
   };
   return (
-    <div className="postFooter">
-      <div className="action">
-        <div
-          className={`action__button ${getIt && "getIt__button__click"} `}
-          onClick={handelGetIt}
-        >
-          <CheckCircleOutlineIcon />
-          <p>get it !</p>
-        </div>
-        <div className="action__button recommend__button">
-          <CommentOutlinedIcon />
-          <p>recommend</p>
-        </div>
-        <div className="action__button collect__button">
-          <LibraryAddOutlinedIcon />
-          <p>collect</p>
-        </div>
-      </div>
-      <div className="description">
-        <BookmarkBorderIcon />
-        <p>{description}</p>
-      </div>
-
-      <div className="recommend">
-        {comments.map((comment, index) => (
-          <div className="recommend__box" key={index}>
-            <Avatar src={comment.photoURL} />
-            <div className="details">
-              <h4>{comment.username}</h4>
-              <p>{comment.comment}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="recommend__sender">
-        <Avatar src={user.photoURL} />
-        <form>
-          <input
-            type="text"
-            placeholder="แสดงความคิดเห็น"
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-          />
-          <button type="submit" onClick={sendComment}>
-            send
-          </button>
-        </form>
-      </div>
-    </div>
+    <Box>
+      <Grid container className="postFooter">
+        <Grid item xs="auto" className={styles.actionContainer}>
+          <Button
+            onClick={handelGetIt}
+            startIcon={<CheckCircleOutlineIcon />}
+            className={getIt ? styles.gotIt : null}
+          >
+            get it !
+          </Button>
+          <Button startIcon={<CommentOutlinedIcon />}>recommend</Button>
+          <Button startIcon={<LibraryAddOutlinedIcon />}>collect</Button>
+        </Grid>
+        <Grid item xs="auto" className="description">
+          <BookmarkBorderIcon />
+          <p>{description}</p>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

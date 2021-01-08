@@ -23,7 +23,6 @@ function App() {
     auth.onAuthStateChanged((authUser) => {
       setLoading(false);
       if (authUser.emailVerified) {
-        console.log(authUser);
         dispatch(
           login({
             uid: authUser.uid,

@@ -5,15 +5,15 @@ import PostFooter from "./PostFooter";
 import PostBody from "./PostBody";
 import PropTypes from "prop-types";
 
-const Post = ({ username, photoURL, description, email, hashtag }) => {
+const Post = ({ data }) => {
   return (
     <div className="post">
       <PostHeader
         className="post__header"
-        username={username}
-        photoURL={photoURL}
-        email={email}
-        hashtag={hashtag}
+        username={data.username}
+        photoURL={data.photoURL}
+        email={data.email}
+        hashtag={data.hashtag}
       />
       <PostBody
         className="post__body"
@@ -21,7 +21,7 @@ const Post = ({ username, photoURL, description, email, hashtag }) => {
       />
       <PostFooter
         className="post__footer"
-        description={description}
+        description={data.description}
         get={777}
         recommend={555}
         collect={30}
@@ -31,11 +31,13 @@ const Post = ({ username, photoURL, description, email, hashtag }) => {
 };
 
 Post.propTypes = {
-  username: PropTypes.string,
-  photoURL: PropTypes.string,
-  description: PropTypes.string,
-  email: PropTypes.string,
-  hashtag: PropTypes.array,
+  data: {
+    username: PropTypes.string,
+    photoURL: PropTypes.string,
+    description: PropTypes.string,
+    email: PropTypes.string,
+    hashtag: PropTypes.array,
+  },
 };
 
 export default Post;

@@ -22,7 +22,8 @@
         "require-jsdoc": "off",
         "react/display-name": "off",
         "no-throw-literal": "off",
-        "max-len": "off"
+        "max-len": "off",
+        "no-unused-vars": "warn"
     },
     "settings": {
         "react": {
