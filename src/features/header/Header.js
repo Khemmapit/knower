@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { chooseProfile } from "../profile/profileSlice";
 import { auth } from "../../firebase";
 import { userSearch } from "../searchResult/searchSlice";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   const [input, setInput] = useState("");
@@ -73,6 +74,7 @@ const Header = () => {
   return (
     <div className="header">
       <h1 onClick={handleKnower}>Knower</h1>
+      <LanguageSwitcher />
       <div className="header_search">
         <SearchIcon />
         <form>

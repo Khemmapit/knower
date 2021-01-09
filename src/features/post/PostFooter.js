@@ -3,20 +3,19 @@ import React, { useState } from "react";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CommentOutlinedIcon from "@material-ui/icons/CommentOutlined";
 import LibraryAddOutlinedIcon from "@material-ui/icons/LibraryAddOutlined";
-import { Avatar } from "@material-ui/core";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
-import { useSelector } from "react-redux";
-import { selectUser } from "../login/userSlice";
+//  import { useSelector } from "react-redux";
+//  import { selectUser } from "../login/userSlice";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
 import indexStyle from "./indexStyle";
+import Hidden from "@material-ui/core/Hidden";
 
 const PostFooter = ({ description, get, recommend, collect }) => {
   const styles = indexStyle();
-  const [input, setInput] = useState("");
+  //  const [input, setInput] = useState("");
   const [getIt, setGetIt] = useState(false);
+  /*
   const user = useSelector(selectUser);
   const [comments, setComments] = useState([
     {
@@ -40,30 +39,36 @@ const PostFooter = ({ description, get, recommend, collect }) => {
     // send user's input to our databases in collection of that post
     setInput("");
   };
+  */
 
   const handelGetIt = () => {
     setGetIt(!getIt);
   };
   return (
-    <Box>
-      <Grid container className="postFooter">
-        <Grid item xs="auto" className={styles.actionContainer}>
-          <Button
-            onClick={handelGetIt}
-            startIcon={<CheckCircleOutlineIcon />}
-            className={getIt ? styles.gotIt : null}
-          >
-            get it !
-          </Button>
-          <Button startIcon={<CommentOutlinedIcon />}>recommend</Button>
-          <Button startIcon={<LibraryAddOutlinedIcon />}>collect</Button>
-        </Grid>
-        <Grid item xs="auto" className="description">
-          <BookmarkBorderIcon />
-          <p>{description}</p>
+    <Grid container direction="column" alignItems="center">
+      <Grid item>
+        <Grid container>
+          <Grid item xs="auto" className={styles.actionContainer}>
+            <Button
+              onClick={handelGetIt}
+              startIcon={<CheckCircleOutlineIcon />}
+              className={getIt ? styles.gotIt : null}
+            >
+              <Hidden xsDown>get it !</Hidden>
+            </Button>
+            <Button startIcon={<CommentOutlinedIcon />}>
+              <Hidden xsDown>recommend</Hidden>
+            </Button>
+            <Button startIcon={<LibraryAddOutlinedIcon />}>
+              <Hidden xsDown>collect</Hidden>
+            </Button>
+          </Grid>
+          <Grid item xs="auto" className="description">
+            <p>{description}</p>
+          </Grid>
         </Grid>
       </Grid>
-    </Box>
+    </Grid>
   );
 };
 

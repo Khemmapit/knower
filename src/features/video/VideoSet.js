@@ -3,12 +3,11 @@ import Post from "../post";
 //  import "./VideoSet.css";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import Tooltip from "@material-ui/core/Tooltip";
 import { useDispatch } from "react-redux";
 import { userSearch } from "../searchResult/searchSlice";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import SwipeableViews from "react-swipeable-views";
 import Grid from "@material-ui/core/Grid";
 import indexStyle from "./indexStyle";
@@ -52,13 +51,13 @@ const VideoSet = ({ data }) => {
       <Hidden smDown>
         <Grid item md={1}>
           <Grid container direction="column" alignItems="center">
-            <Button
+            <IconButton
               onClick={handleBack}
               disabled={activeStep === 0}
               className={styles.postControlButton}
             >
-              <NavigateBeforeIcon fontSize="large" />
-            </Button>
+              <NavigateBeforeIcon className={styles.arrowIcon} />
+            </IconButton>
           </Grid>
         </Grid>
       </Hidden>
@@ -79,13 +78,13 @@ const VideoSet = ({ data }) => {
       <Hidden smDown>
         <Grid item md={1}>
           <Grid container direction="column" alignItems="center">
-            <Button
+            <IconButton
               onClick={handleNext}
               disabled={activeStep === maxSteps - 1}
               className={styles.postControlButton}
             >
-              <NavigateNextIcon fontSize="large" />
-            </Button>
+              <NavigateNextIcon className={styles.arrowIcon} />
+            </IconButton>
           </Grid>
         </Grid>
       </Hidden>
