@@ -1,7 +1,8 @@
 .profile__collection {
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 0px;
+  width: 80vw;
 }
 .profile__collection > h3 {
   font-size: 30px;
@@ -10,9 +11,26 @@
 .collection__contentList {
   display: flex;
   overflow-x: scroll;
-  padding: 20px 0px;
+  padding: 10px 0px;
   scroll-snap-type: x mandatory;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 50px;
 }
 .subcollection__post {
   scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  margin: 0px 150px;
+}
+.subcollection__post > .MuiIconButton-root {
+  border: 1px solid #de5c8e;
+  color: #de5c8e;
+}
+.subcollection__post > .MuiIconButton-root:hover {
+  background-color: #de5c8e;
+  color: white;
+}
+.lastSubcollection__post {
+  padding-right: 90px;
 }

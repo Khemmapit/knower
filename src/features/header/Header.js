@@ -7,9 +7,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { logout, selectUser } from "../login/userSlice";
 import { Avatar } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { choose_profile } from "../profile/profileSlice";
-import { selectSearch, user_search } from "../searchResult/searchSlice";
+import { useHistory } from "react-router-dom";
+import { chooseProfile } from "../profile/profileSlice";
+import { selectSearch, userSearch } from "../searchResult/searchSlice";
 import { auth } from "../../firebase";
 
 const Header = () => {
@@ -41,7 +41,7 @@ const Header = () => {
   };
   const handleProfile = () => {
     dispatch(
-      choose_profile({
+      chooseProfile({
         uid: user.uid,
         photoURL: user.photoURL,
         email: user.email,
@@ -54,7 +54,7 @@ const Header = () => {
   const handleSearch = (event) => {
     event.preventDefault();
     dispatch(
-      user_search({
+      userSearch({
         hashtag: input,
       })
     );
@@ -64,7 +64,7 @@ const Header = () => {
     setInput("");
     history.replace("/");
     dispatch(
-      user_search({
+      userSearch({
         hashtag: null,
       })
     );
@@ -97,7 +97,7 @@ const Header = () => {
         className="menus"
       >
         <MenuItem onClick={handleProfile}>
-          <div className="profile">
+          <div className="header__profile">
             <Avatar src={user.photoURL} />
             <p>{user.displayName}</p>
           </div>

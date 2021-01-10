@@ -24,7 +24,9 @@
 .header__leftDescription > h3:hover {
   text-decoration: underline #de5c8e;
 }
-
+.header__left > small {
+  margin-left: 10px;
+}
 .description {
   display: flex;
   width: fit-content;

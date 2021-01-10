@@ -1,63 +1,89 @@
 import { Avatar, IconButton } from "@material-ui/core";
-import React, { useState } from "react";
-import "./PostHeader.css";
+import React from "react";
+//  import "./PostHeader.css";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../login/userSlice";
+import { useDispatch } from "react-redux";
 import { choose_profile } from "../profile/profileSlice";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { user_search } from "../searchResult/searchSlice";
+import PropTypes from "prop-types";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import indexStyles from "./indexStyles";
+import Typography from "@material-ui/core/Typography";
+import Hidden from "@material-ui/core/Hidden";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 
-const PostHeader = ({ username, photoURL, hashtag, email, uid }) => {
+const PostHeader = ({ username, photoURL, hashtag, email }) => {
+  const styles = indexStyles();
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleSearch = (hash) => {
-    dispatch(
-      user_search({
-        hashtag: hash,
-      })
-    );
+    // dispatch(
+    //   userSearch({
+    //     hashtag: hash,
+    //   })
+    // );
     history.replace(`/search:${hash}`);
   };
 
   const goToProfile = () => {
-    dispatch(
-      choose_profile({
-        photoURL: photoURL,
-        email: email,
-        displayName: username,
-        uid: uid,
-      })
-    );
+    // dispatch(
+    //   chooseProfile({
+    //     photoURL: photoURL,
+    //     email: email,
+    //     displayName: username,
+    //   })
+    // );
     history.replace(`/profile:${email}`);
     // email or displayName ???
   };
 
   return (
-    <div className="postHeader">
-      <div className="header__left">
-        <Link to={`/profile:${email}`}>
-          <Avatar src={photoURL} onClick={goToProfile} />
-        </Link>
-        <div className="header__leftDescription">
-          <h3 onClick={goToProfile}>{username}</h3>
-          <div className="description">
+    <Grid container className={styles.headerContainer} alignItems="center">
+      <Grid item xs={12} sm={4}>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item>
+            <Avatar src={photoURL} onClick={goToProfile} alt={username} />
+          </Grid>
+          <Grid item>
+            <Link className={styles.usernameLink} onClick={goToProfile}>
+              {username.split(" ")[0]}
+            </Link>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <Grid container direction="column" alignItems="center">
+          <Breadcrumbs
+            className={styles.tags}
+            separator={<NavigateNextIcon fontSize="small" />}
+          >
             {hashtag.map((hash, index) => (
-              <small onClick={() => handleSearch(hash)} key={index}>
-                #{hash}
-              </small>
+              <Link onClick={() => handleSearch(hash)} key={index}>
+                {hash}
+              </Link>
             ))}
-          </div>
-        </div>
-      </div>
-      <div className="header__right">
-        <IconButton>
-          <MoreHorizIcon />
-        </IconButton>
-      </div>
-    </div>
+          </Breadcrumbs>
+        </Grid>
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <Grid container justify="flex-end">
+          <IconButton>
+            <MoreHorizIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
+PostHeader.propTypes = {
+  username: PropTypes.string,
+  photoURL: PropTypes.string,
+  email: PropTypes.string,
+  hashtag: PropTypes.array,
+};
 export default PostHeader;

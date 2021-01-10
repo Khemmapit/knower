@@ -1,35 +1,50 @@
 import React from "react";
-import "./Post.css";
-import PostHeader from "./PostHeader";
+import Card from "@material-ui/core/Card";
+import Typography from "@material-ui/core/Typography";
+import PropTypes from "prop-types";
+import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Link from "@material-ui/core/Link";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import indexStyles from "./indexStyles";
 import PostFooter from "./PostFooter";
-import PostBody from "./PostBody";
-import { useDispatch } from "react-redux";
-import { user_search } from "../searchResult/searchSlice";
+import PostHeader from "./PostHeader";
 
-const Post = ({ username, photoURL, description, email, hashtag, uid }) => {
+const Post = ({ data }) => {
+  const styles = indexStyles();
   return (
-    <div className="post">
+    <Card className={styles.videoSetContainer}>
       <PostHeader
-        className="post__header"
-        username={username}
-        photoURL={photoURL}
-        email={email}
-        hashtag={hashtag}
-        uid={uid}
+        username={data.username}
+        photoURL={data.profilePhoto}
+        email={data.email}
+        hashtag={data.hashtag}
       />
-      <PostBody
-        className="post__body"
-        videoURL="gs://knower-test.appspot.com/math/calculus/limit/Introduction to limits Limits Differential Calculus Khan Academy.mp4"
-      />
-      <PostFooter
-        className="post__footer"
-        description={description}
-        get={777}
-        recommend={555}
-        collect={30}
-      />
-    </div>
+      {data.type === "video" ? (
+        <video className={styles.content} src={data.mediaURL} controls />
+      ) : (
+        <img
+          className={styles.content}
+          src={data.mediaURL}
+          alt={data.description}
+        />
+      )}
+      <PostFooter data={data.description} get={0} recommend={0} collect={0} />
+    </Card>
   );
+};
+
+Post.propTypes = {
+  data: {
+    username: PropTypes.string,
+    profilePhoto: PropTypes.string,
+    mediaURL: PropTypes.string,
+    description: PropTypes.string,
+    email: PropTypes.string,
+    type: PropTypes.string,
+    hashtag: PropTypes.array,
+  },
 };
 
 export default Post;
