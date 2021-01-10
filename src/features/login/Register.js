@@ -84,18 +84,6 @@ export default function Register() {
     /* Birth Date state */
   }
   const [birthDate, setBirthDate] = useState("2000-01-31");
-  // const [day,setDay] = useState(1);
-  // const [openDay,setOpenDay] = useState(false);
-  // const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-  // const [month,setMonth] = useState("มกราคม");
-  // const [openMonth,setOpenMonth] = useState(false);
-  // const months = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"]
-  // const [year,setYear] = useState(2020);
-  // const [openYear,setOpenYear] = useState(false);
-  // const years = []
-  // for (let i = 2020 ; i>1919 ; i-- ) {
-  //   years.push(i);
-  // }
   {
     /*Gender state*/
   }

@@ -1,9 +1,8 @@
 import React from "react";
-import "./Collection.css";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Paper } from "@material-ui/core";
-import useStyles from "./CollectionStyles";
+import useStyles from "./ProfileStyles";
 import VideoSet from "../video/VideoSet";
 
 const postData = [
