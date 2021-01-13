@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import { auth } from "./firebase";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,12 +10,26 @@ import { selectProfile } from "./features/profile/profileSlice";
 import Feed from "./features/feed/Feed";
 import SearchResult from "./features/searchResult/SearchResult";
 import { selectSearch } from "./features/searchResult/searchSlice";
+import { Grid, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  app: {
+    backgroundColor: "#f9f9f9",
+    overflowX: "hidden",
+  },
+  appBody: {
+    paddingTop: "70px",
+    width: "100vw",
+  },
+}));
 
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const styles = useStyles();
   const profile = useSelector(selectProfile);
   const search = useSelector(selectSearch);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -53,39 +66,45 @@ function App() {
   if (loading) return <div>loading...</div>;
 
   return (
-    <div className="app">
+    <Grid container direction="column" className={styles.app}>
       {user ? (
         <Router>
           <Switch>
             {/* SearchResult */}
             <Route path={`/search:${search?.hashtag}`}>
-              <Header />
-              <div className="app__body">
+              <Grid item>
+                <Header />
+              </Grid>
+              <Grid item className={styles.appBody}>
                 <SearchResult />
-              </div>
+              </Grid>
             </Route>
 
             {/* Profile */}
             <Route path={`/profile:${profile?.email}`}>
-              <Header />
-              <div className="app__body">
+              <Grid item xs={12}>
+                <Header />
+              </Grid>
+              <Grid item className={styles.appBody} xs={12}>
                 <Profile />
-              </div>
+              </Grid>
             </Route>
 
             {/* Feed */}
             <Route path="/">
-              <Header />
-              <div className="app__body">
+              <Grid item>
+                <Header />
+              </Grid>
+              <Grid item className={styles.appBody}>
                 <Feed />
-              </div>
+              </Grid>
             </Route>
           </Switch>
         </Router>
       ) : (
         <Login />
       )}
-    </div>
+    </Grid>
   );
 }
 

@@ -16,7 +16,6 @@ const fetcher = async (key) => {
 // this function fetch each one of post data form collection "post" and doc "id" (variable) }
 const fetchPostData = async (id) => {
   let postData;
-  let userData;
   console.log(id);
   await db
     .collection("post")
@@ -24,16 +23,22 @@ const fetchPostData = async (id) => {
     .get()
     .then((doc) => {
       postData = doc.data();
-      db.collection("user")
-        .doc(postData.uid)
-        .get()
-        .then((user) => {
-          console.log(user.data());
-          userData = user.data();
-        });
     });
-  return { ...postData, user: userData };
+  return postData;
+};
+
+const fetchUserData = async (uid) => {
+  let userData = {};
+  await db
+    .collection("user")
+    .doc(uid)
+    .get()
+    .then((doc) => {
+      console.log(doc.data());
+      userData = doc.data();
+    });
+  return userData;
 };
 
 export default fetcher;
-export { fetchPostData };
+export { fetchPostData, fetchUserData };

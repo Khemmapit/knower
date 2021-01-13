@@ -1,20 +1,22 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import Link from "@material-ui/core/Link";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import indexStyles from "./indexStyles";
 import PostFooter from "./PostFooter";
 import PostHeader from "./PostHeader";
+import { useMediaQuery, useTheme } from "@material-ui/core";
 
 const Post = ({ data }) => {
   const styles = indexStyles();
+  const theme = useTheme();
+  const isXSmall = useMediaQuery(theme.breakpoints.down("xs"));
+
   return (
-    <Card className={styles.videoSetContainer}>
+    <Card
+      className={
+        isXSmall ? styles.videoSetContainerXS : styles.videoSetContainer
+      }
+    >
       <PostHeader
         username={data.username}
         photoURL={data.profilePhoto}

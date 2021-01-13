@@ -10,6 +10,13 @@ const styles = makeStyles({
     marginLeft: "auto",
     marginRight: "auto",
     borderRadius: 10,
+    width: "100%",
+  },
+  videoSetContainerXS: {
+    paddingBottom: 30,
+    maxWidth: 700,
+    borderRadius: 10,
+    width: "100%",
   },
   profileContainer: {
     padding: 10,
@@ -28,7 +35,7 @@ const styles = makeStyles({
     marginLeft: 10,
   },
   gotIt: {
-    color: "red",
+    color: "#de5c8e",
   },
 });
 

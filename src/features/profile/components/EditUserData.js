@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import useStyles from "./ProfileStyles";
+import useStyles from "../ProfileStyles";
 import firebase from "firebase";
-import db from "../../firebase";
-import { login, selectUser } from "../login/userSlice";
+import db from "../../../firebase";
+import { login, selectUser } from "../../login/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
@@ -12,10 +12,11 @@ import {
   DialogContent,
   IconButton,
   TextField,
+  Box,
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 
-const EditUserData = ({ userData }) => {
+const EditUserData = ({ userData, size, screen }) => {
   const styles = useStyles();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
@@ -75,7 +76,11 @@ const EditUserData = ({ userData }) => {
 
   return (
     <>
-      <IconButton onClick={() => setOpenEdit(true)} className={styles.editIcon}>
+      <IconButton
+        onClick={() => setOpenEdit(true)}
+        className={styles.editIcon}
+        size={size}
+      >
         <EditIcon />
       </IconButton>
       {/* Edit user data Dialog */}
@@ -83,8 +88,9 @@ const EditUserData = ({ userData }) => {
         open={openEdit}
         onClose={() => setOpenEdit(false)}
         aria-labelledby="edit-form"
+        className={screen == "xs" && styles.editDialog}
       >
-        <DialogTitle id="edit-form">Edit</DialogTitle>
+        <DialogTitle id="edit-form">Edit Profile</DialogTitle>
         <DialogContent>
           <TextField
             margin="dense"
