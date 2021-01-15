@@ -17,8 +17,6 @@ const useStyles = makeStyles((theme) => ({
   },
   rootSearch: {
     padding: "2px 4px",
-    display: "flex",
-    alignItems: "center",
     color: "#de5c8e",
     borderRadius: "30px",
     marginLeft: "70px",
@@ -32,18 +30,21 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "0px",
     width: "60vw",
   },
+  searchBox: {
+    display: "flex",
+    width: "100%",
+  },
   inputSearch: {
     marginLeft: theme.spacing(1),
     flex: 1,
     color: "#de5c8e",
   },
   arrowBackIconXS: {
-    marginRight: "-10px",
-    color: "#de5c8e",
+    marginRight: "-20px",
   },
 
   rootSearchXSOnClick: {
-    marginLeft: "-70px",
+    padding: "0px",
   },
   inputSearchXS: {
     marginLeft: theme.spacing(1),

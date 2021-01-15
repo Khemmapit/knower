@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import SearchIcon from "@material-ui/icons/Search";
 import { logout, selectUser } from "../login/userSlice";
 import {
   AppBar,
@@ -22,15 +22,14 @@ import { selectSearch, userSearch } from "../searchResult/searchSlice";
 import { auth } from "../../firebase";
 import useStyles from "./HeaderStyles";
 import { useTheme } from "@material-ui/core/styles";
-import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import HeaderSearch from "./HeaderSearch";
 
 const Header = () => {
-  const [input, setInput] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(selectUser);
-  const search = useSelector(selectSearch);
   const theme = useTheme();
   const styles = useStyles();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
@@ -68,20 +67,8 @@ const Header = () => {
     history.replace(`/profile:${user.email}`);
     setAnchorEl(null);
   };
-  const handleSearch = (event) => {
-    event.preventDefault();
-    if (!input) {
-      dispatch(
-        userSearch({
-          hashtag: input,
-        })
-      );
-      history.replace(`/search:${input}`);
-    }
-  };
 
   const handleKnower = () => {
-    setInput("");
     setClickSearchIcon(false);
     history.replace("/");
     dispatch(
@@ -94,9 +81,9 @@ const Header = () => {
   return (
     <AppBar position="fixed" className={styles.header}>
       <Toolbar>
-        <Grid container spacing={3} justify="space-between" alignItems="center">
+        <Grid container justify="space-between" alignItems="center">
           {/* Knower logo */}
-          <Grid item xs={1} sm={1} md={2}>
+          <Grid item xs={1} sm={2} md={2}>
             {isSmall ? (
               isXSmall ? (
                 !clickSearchIcon && (
@@ -134,48 +121,32 @@ const Header = () => {
           {/* Search information*/}
           {isXSmall ? (
             clickSearchIcon ? (
-              <Grid item xs={8} className={styles.rootSearchXSOnClick}>
+              <Grid item xs={12}>
                 <Grid
                   container
-                  spacing={1}
+                  spacing={7}
                   alignItems="center"
                   direction="row"
-                  justify="start"
+                  justify="flex-start"
+                  className={styles.rootSearchXSOnClick}
                 >
-                  <Grid item xs={2}>
+                  <Grid item xs={1} className={styles.arrowBackIconXS}>
                     <IconButton
                       onClick={() => setClickSearchIcon(false)}
-                      className={styles.arrowBackIconXS}
+                      style={{ color: "#de5c8e", padding: "5px" }}
                     >
-                      <KeyboardBackspaceIcon />
+                      <ArrowBackIosIcon style={{ fontSize: "20px" }} />
                     </IconButton>
                   </Grid>
-
-                  <Grid item xs={10}>
-                    <Paper component="form" className={styles.rootSearchXS}>
-                      <InputBase
-                        className={styles.inputSearchXS}
-                        placeholder="Search on Knower"
-                        inputProps={{ "aria-label": "search google maps" }}
-                        value={input}
-                        onChange={(event) => setInput(event.target.value)}
-                      />
-                      <IconButton
-                        type="submit"
-                        className={styles.iconButtonSeach}
-                        aria-label="search"
-                        onClick={handleSearch}
-                      >
-                        <SearchIcon />
-                      </IconButton>
-                    </Paper>
+                  <Grid item xs={10} fullWidth>
+                    <HeaderSearch />
                   </Grid>
                 </Grid>
               </Grid>
             ) : (
               <Grid
                 item
-                xs={7}
+                xs={6}
                 className={styles.iconButtonSeachXS}
                 onClick={() => setClickSearchIcon(true)}
               >
@@ -186,36 +157,22 @@ const Header = () => {
             )
           ) : (
             <Grid item sm={7} md={6}>
-              <Paper component="form" className={styles.rootSearch}>
-                <InputBase
-                  className={styles.inputSearch}
-                  placeholder={`${isSmall ? "Search" : "Search on Knower"}`}
-                  inputProps={{ "aria-label": "search google maps" }}
-                  value={input}
-                  onChange={(event) => setInput(event.target.value)}
-                />
-                <IconButton
-                  type="submit"
-                  className={styles.iconButtonSeach}
-                  aria-label="search"
-                  onClick={handleSearch}
-                >
-                  <SearchIcon />
-                </IconButton>
-              </Paper>
+              <HeaderSearch searchIconOnClick={true} />
             </Grid>
           )}
 
           {/* Menu */}
-          <Grid item xs={1} sm={2} md={2}>
-            {/* MenuIcon */}
-            <IconButton
-              onClick={handleClick}
-              className={isXSmall ? styles.menuIconXS : styles.menuIcon}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Grid>
+          {(!isXSmall || !clickSearchIcon) && (
+            <Grid item sm={1} md={2}>
+              {/* MenuIcon */}
+              <IconButton
+                onClick={handleClick}
+                className={isXSmall ? styles.menuIconXS : styles.menuIcon}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Grid>
+          )}
         </Grid>
 
         <Menu

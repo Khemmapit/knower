@@ -1,4 +1,4 @@
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, IconButton, useMediaQuery } from "@material-ui/core";
 import React from "react";
 //  import "./PostHeader.css";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -14,11 +14,14 @@ import indexStyles from "./indexStyles";
 import Typography from "@material-ui/core/Typography";
 import Hidden from "@material-ui/core/Hidden";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import { useTheme } from "@material-ui/styles";
 
 const PostHeader = ({ username, photoURL, hashtag, email }) => {
   const styles = indexStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  const isSmall = useMediaQuery("(max-width:960px)");
+  const isXSmall = useMediaQuery("(max-width:600px)");
 
   const handleSearch = (hash) => {
     // dispatch(
@@ -43,8 +46,8 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
 
   return (
     <Grid container className={styles.headerContainer} alignItems="center">
-      <Grid item xs={12} sm={4}>
-        <Grid container spacing={1} alignItems="center">
+      <Grid item xs={4} sm={3}>
+        <Grid container spacing={1} alignItems="center" justify="center">
           <Grid item>
             <Avatar src={photoURL} onClick={goToProfile} alt={username} />
           </Grid>
@@ -55,7 +58,7 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={7} sm={6}>
         <Grid container direction="column" alignItems="center">
           <Breadcrumbs
             className={styles.tags}
@@ -69,7 +72,7 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
           </Breadcrumbs>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={1} sm={3}>
         <Grid container justify="flex-end">
           <IconButton>
             <MoreHorizIcon />

@@ -7,6 +7,7 @@ const styles = makeStyles({
   },
   videoSetXS: {
     width: "90vw",
+    marginBottom: "50px",
   },
   postControlButton: {
     borderRadius: "50%",
