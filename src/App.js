@@ -11,6 +11,10 @@ import { selectProfile } from "./features/profile/profileSlice";
 import Feed from "./features/feed/Feed";
 import SearchResult from "./features/searchResult/SearchResult";
 import { selectSearch } from "./features/searchResult/searchSlice";
+import Loading from "./features/loading";
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
+import theme from "./config/theme";
+import Upload from "./features/upload";
 
 function App() {
   const user = useSelector(selectUser);
@@ -37,40 +41,39 @@ function App() {
     });
   }, []);
 
-  if (loading) return <div>loading...</div>;
+  if (loading) return <Loading />;
+  if (!user) return <Login />;
   return (
     <div className="app">
-      {user ? (
+      <MuiThemeProvider theme={theme}>
         <Router>
           <Switch>
             {/* SearchResult */}
             <Route path={`/search:${search?.hashtag}`}>
               <Header />
-              <div className="app__body">
-                <SearchResult />
-              </div>
+              <SearchResult />
             </Route>
 
             {/* Profile */}
             <Route path={`/profile:${profile?.email}`}>
               <Header />
-              <div className="app__body">
-                <Profile />
-              </div>
+              <Profile />
+            </Route>
+
+            {/* Profile */}
+            <Route path="/upload">
+              <Header />
+              <Upload />
             </Route>
 
             {/* Feed */}
             <Route path="/">
               <Header />
-              <div className="app__body">
-                <Feed />
-              </div>
+              <Feed />
             </Route>
           </Switch>
         </Router>
-      ) : (
-        <Login />
-      )}
+      </MuiThemeProvider>
     </div>
   );
 }

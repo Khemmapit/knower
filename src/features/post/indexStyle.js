@@ -1,6 +1,6 @@
 import makeStyles from "@material-ui/styles/makeStyles";
 
-const styles = makeStyles({
+const styles = makeStyles((theme) => ({
   content: {
     width: "100%",
   },
@@ -28,8 +28,8 @@ const styles = makeStyles({
     marginLeft: 10,
   },
   gotIt: {
-    color: "red",
+    color: theme.palette.primary.main,
   },
-});
+}));
 
 export default styles;

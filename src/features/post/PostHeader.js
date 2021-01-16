@@ -11,9 +11,8 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import indexStyle from "./indexStyle";
-import Typography from "@material-ui/core/Typography";
-import Hidden from "@material-ui/core/Hidden";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import Box from "@material-ui/core/Box";
 
 const PostHeader = ({ username, photoURL, hashtag, email }) => {
   const styles = indexStyle();
@@ -42,41 +41,41 @@ const PostHeader = ({ username, photoURL, hashtag, email }) => {
   };
 
   return (
-    <Grid container className={styles.headerContainer} alignItems="center">
-      <Grid item xs={12} sm={4}>
-        <Grid container spacing={1} alignItems="center">
-          <Grid item>
-            <Avatar src={photoURL} onClick={goToProfile} alt={username} />
+    <Box className={styles.headerContainer}>
+      <Grid container direction="row" alignItems="center">
+        <Grid item xs={6}>
+          <Grid container spacing={1} alignItems="center">
+            <Grid item>
+              <Avatar src={photoURL} onClick={goToProfile} alt={username} />
+            </Grid>
+            <Grid item>
+              <Link className={styles.usernameLink} onClick={goToProfile}>
+                {username.split(" ")[0]}
+              </Link>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Link className={styles.usernameLink} onClick={goToProfile}>
-              {username.split(" ")[0]}
-            </Link>
+        </Grid>
+        <Grid item xs={6}>
+          <Grid container justify="flex-end">
+            <IconButton>
+              <MoreHorizIcon />
+            </IconButton>
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={4}>
-        <Grid container direction="column" alignItems="center">
-          <Breadcrumbs
-            className={styles.tags}
-            separator={<NavigateNextIcon fontSize="small" />}
-          >
-            {hashtag.map((hash, index) => (
-              <Link onClick={() => handleSearch(hash)} key={index}>
-                {hash}
+
+      <Grid container direction="column" alignItems="center">
+        <Grid item xs={12}>
+          <Breadcrumbs separator={<NavigateNextIcon />}>
+            {hashtag.map((tag, index) => (
+              <Link onClick={(e) => handleSearch(tag)} key={index}>
+                {tag}
               </Link>
             ))}
           </Breadcrumbs>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={4}>
-        <Grid container justify="flex-end">
-          <IconButton>
-            <MoreHorizIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
-    </Grid>
+    </Box>
   );
 };
 

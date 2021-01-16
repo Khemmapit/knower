@@ -6,11 +6,13 @@ import Register from "./Register";
 import db from "../../firebase";
 import { useDispatch } from "react-redux";
 import { login } from "./userSlice";
+import Loading from "../loading";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const signInWithEmail = (event) => {
     // Login with email and password
@@ -57,6 +59,7 @@ const Login = () => {
 
   const signInWithGoogle = () => {
     // Login with Google
+    setLoading(true);
     auth
       .signInWithPopup(googleProvider)
       .then(({ user }) => {
@@ -70,7 +73,10 @@ const Login = () => {
         );
         addNewUserToDB(user);
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        alert(error.message);
+        setLoading(false);
+      });
   };
 
   const signInWithFacebook = () => {
@@ -88,9 +94,12 @@ const Login = () => {
         );
         addNewUserToDB(user);
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
+  if (loading) return <Loading />;
   return (
     <div className="login">
       <div className="login_left">
