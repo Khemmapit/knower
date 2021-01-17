@@ -1,29 +1,25 @@
 import React from "react";
-import Post from "../post/Post";
+import Post from "../post";
+//  import "./VideoSet.css";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import Tooltip from "@material-ui/core/Tooltip";
 import { useDispatch } from "react-redux";
 import { userSearch } from "../searchResult/searchSlice";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import SwipeableViews from "react-swipeable-views";
 import Grid from "@material-ui/core/Grid";
-import indexStyles from "./indexStyles";
-import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-import { useMediaQuery, useTheme } from "@material-ui/core";
+import indexStyle from "./indexStyles";
+import Hidden from "@material-ui/core/Hidden";
 
 const VideoSet = ({ data }) => {
-  const styles = indexStyles();
+  const styles = indexStyle();
   const dispatch = useDispatch();
   const history = useHistory();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = data.length;
-  const theme = useTheme();
-  const isXSmall = useMediaQuery(theme.breakpoints.down("xs"));
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -48,57 +44,24 @@ const VideoSet = ({ data }) => {
   return (
     <Grid
       container
-      className={isXSmall ? styles.videoSetXS : styles.videoSet}
+      className={styles.videoSet}
       alignItems="center"
-      justify={isSmall && "center"}
       zeroMinWidth={true}
-      direction={isSmall ? "column" : "row"}
     >
-      {isSmall ? (
-        <Grid item md={1}>
-          <Grid
-            container
-            spacing={3}
-            direction="row"
-            alignItems="center"
-            justify="center"
-          >
-            <Grid item>
-              <Button
-                onClick={handleBack}
-                disabled={activeStep === 0}
-                className={styles.postControlButtonSM}
-              >
-                <KeyboardArrowLeftIcon fontSize="small" /> Back
-              </Button>
-            </Grid>
-            <Grid item>{activeStep + 1 + "/" + maxSteps}</Grid>
-            <Grid item>
-              <Button
-                onClick={handleNext}
-                disabled={activeStep === maxSteps - 1}
-                className={styles.postControlButtonSM}
-              >
-                Next <KeyboardArrowRightIcon fontSize="small" />
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
-      ) : (
+      <Hidden smDown>
         <Grid item md={1}>
           <Grid container direction="column" alignItems="center">
-            <Button
+            <IconButton
               onClick={handleBack}
               disabled={activeStep === 0}
               className={styles.postControlButton}
             >
-              <NavigateBeforeIcon fontSize="large" />
-            </Button>
+              <NavigateBeforeIcon className={styles.arrowIcon} />
+            </IconButton>
           </Grid>
         </Grid>
-      )}
-
-      <Grid item xs={10} sm={8} md={10}>
+      </Hidden>
+      <Grid item sm={12} md={10}>
         <SwipeableViews
           index={activeStep}
           ignoreNativeScroll
@@ -112,21 +75,19 @@ const VideoSet = ({ data }) => {
           ))}
         </SwipeableViews>
       </Grid>
-      {isSmall ? (
-        <></>
-      ) : (
-        <Grid item xs={1} sm={1} md={1}>
+      <Hidden smDown>
+        <Grid item md={1}>
           <Grid container direction="column" alignItems="center">
-            <Button
+            <IconButton
               onClick={handleNext}
               disabled={activeStep === maxSteps - 1}
               className={styles.postControlButton}
             >
-              <NavigateNextIcon fontSize="large" />
-            </Button>
+              <NavigateNextIcon className={styles.arrowIcon} />
+            </IconButton>
           </Grid>
         </Grid>
-      )}
+      </Hidden>
     </Grid>
   );
 };

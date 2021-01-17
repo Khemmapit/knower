@@ -1,86 +1,68 @@
-import {
-  Button,
-  TextField,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  Dialog,
-} from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { Button, TextField } from "@material-ui/core";
+import React, { useState } from "react";
 import "./Login.css";
 import { auth, googleProvider, facebookProvider } from "../../firebase";
 import Register from "./Register";
 import db from "../../firebase";
 import { useDispatch } from "react-redux";
 import { login } from "./userSlice";
+import Loading from "../loading";
 
 const Login = () => {
-  // tools for control
-  const dispatch = useDispatch();
-
-  // Internal state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [open, setOpen] = useState(false);
-  const [forgetEmail, setForgetEmail] = useState("");
-  const [userUid, setUserUid] = useState([]);
-
-  useEffect(() => {
-    db.collection("user")
-      .get()
-      .then((snapshot) =>
-        snapshot.forEach((doc) => setUserUid(...userUid, doc.data().uid))
-      );
-  }, []);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const signInWithEmail = (event) => {
     // Login with email and password
     event.preventDefault();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userAuth) => {
-        console.log(userAuth);
-        if (userAuth.user.emailVerified) {
-          dispatch(
-            login({
-              email: userAuth.user.email,
-              uid: userAuth.user.uid,
-              displayName: userAuth.user.displayName,
-              photoURL: userAuth.user.photoURL,
-            })
-          );
-        } else {
-          alert(`Please verify your email : ${userAuth.user.email}`);
-        }
-      })
-      .catch((error) =>
-        alert("email or password false or don't have these in our system.")
-      );
+    auth.signInWithEmailAndPassword(email, password).then((userAuth) => {
+      console.log(userAuth);
+      if (userAuth.user.emailVerified) {
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+            displayName: userAuth.user.displayName,
+            photoURL: userAuth.user.photoURL,
+          })
+        );
+      } else {
+        alert(`Please verify your email : ${userAuth.user.email}`);
+      }
+    });
   };
 
   const addNewUserToDB = (user) => {
-    db.collection("user").doc(user.uid).set({
-      displayName: user.displayName,
-      email: user.email,
-      photoURL: user.photoURL,
-      uid: user.uid,
-      purpose: "",
-      description: "",
-    });
-    db.collection("follow").doc(user.uid).set({
-      follower: [],
-      following: [],
-    });
+    // This function try to add new user data to databases at "user" collection
+    const userEmail = [];
+    db.collection("user")
+      .get()
+      .then((snapshot) =>
+        snapshot.forEach((doc) => userEmail.push(doc.data().email))
+      );
+    const check = userEmail.find((element) => element == user.email);
+    if (!check) {
+      console.log("get in", userEmail);
+      db.collection("user").doc(user.email).update({
+        content: 0,
+        displayName: user.displayName,
+        email: user.email,
+        follower: 0,
+        following: 0,
+        photoURL: user.photoURL,
+        uid: user.uid,
+      });
+    }
   };
 
   const signInWithGoogle = () => {
-    //Login with Google
+    // Login with Google
+    setLoading(true);
     auth
       .signInWithPopup(googleProvider)
-      .then((userAuth) => {
-        console.log(userAuth);
-        const user = userAuth.user;
+      .then(({ user }) => {
         dispatch(
           login({
             uid: user.uid,
@@ -89,21 +71,19 @@ const Login = () => {
             displayName: user.displayName,
           })
         );
-        if (userAuth.additionalUserInfo.isNewUser) {
-          console.log("is new user !");
-          addNewUserToDB(user);
-        }
+        addNewUserToDB(user);
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        alert(error.message);
+        setLoading(false);
+      });
   };
 
   const signInWithFacebook = () => {
-    //Login with Facebook
+    // Login with Facebook
     auth
       .signInWithPopup(facebookProvider)
-      .then((userAuth) => {
-        console.log(userAuth);
-        const user = userAuth.user;
+      .then(({ user }) => {
         dispatch(
           login({
             uid: user.uid,
@@ -112,50 +92,14 @@ const Login = () => {
             displayName: user.displayName,
           })
         );
-        if (userAuth.additionalUserInfo.isNewUser) {
-          addNewUserToDB(user);
-        }
+        addNewUserToDB(user);
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
-  const validateEmail = (email) => {
-    if (email === null || email === "") {
-      return false;
-    } else {
-      if (email.includes("@")) {
-        // will code more in the future
-        return true;
-      } else {
-        return false;
-      }
-    }
-  };
-
-  const handleSubmitForgetEmail = async () => {
-    // control to send password of forgetEmail to forgetEmail address.
-    if (validateEmail(forgetEmail)) {
-      await alert("Send your password to your email now!");
-    } else {
-      await alert("Your email address pattern is false !.");
-    }
-  };
-
-  const handleForget = () => {
-    // set open state to open/close ลืมรหัสผ่าน? dialog
-    if (open) {
-      if (forgetEmail !== "") {
-        handleSubmitForgetEmail();
-        setForgetEmail("");
-        setOpen(false);
-      } else {
-        setOpen(false);
-      }
-    } else {
-      setOpen(true);
-    }
-  };
-
+  if (loading) return <Loading />;
   return (
     <div className="login">
       <div className="login_left">
@@ -167,7 +111,7 @@ const Login = () => {
       </div>
       <div className="login_right">
         <div className="login_box">
-          <form className="login_boxDefault">
+          <div className="login_boxDefault">
             <TextField
               id="outlined-basic"
               label="Email"
@@ -186,38 +130,8 @@ const Login = () => {
             <Button type="submit" onClick={signInWithEmail}>
               เข้าสู่ระบบ
             </Button>
-          </form>
-          {/* send password to user email */}
-          <p onClick={handleForget}>ลืมรหัสผ่าน ?</p>
-          <Dialog
-            open={open}
-            onClose={handleForget}
-            aria-labelledby="forget-dialog"
-          >
-            <DialogTitle id="forget-dialog">ลืมรหัสผ่าน ?</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                ทาง Knower จะส่ง password สำหรับการเข้าสู่ระบบด้วย email ไปยัง
-                email ของคุณที่ใส่ใน email address ด้านล่างนี้
-              </DialogContentText>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Email Address"
-                type="email"
-                fullWidth
-                value={forgetEmail}
-                onChange={(event) => setForgetEmail(event.target.value)}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleForget} color="primary">
-                ยืนยัน
-              </Button>
-            </DialogActions>
-          </Dialog>
-          {/* Login with other provider (facebook,google) */}
+          </div>
+          <p>ลืมรหัสผ่าน ?</p>
           <div className="login_boxProvider">
             <button onClick={signInWithGoogle}>
               <span>

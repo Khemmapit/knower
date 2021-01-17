@@ -24,6 +24,7 @@ import useStyles from "./HeaderStyles";
 import { useTheme } from "@material-ui/core/styles";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import HeaderSearch from "./HeaderSearch";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);

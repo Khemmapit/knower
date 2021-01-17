@@ -1,29 +1,22 @@
 import makeStyles from "@material-ui/styles/makeStyles";
+import useTheme from "../../config/theme";
 
-const styles = makeStyles({
+const styles = makeStyles((theme) => ({
   videoSet: {
     marginBottom: 50,
-    width: "100%",
-  },
-  videoSetXS: {
-    width: "90vw",
-    marginBottom: "50px",
   },
   postControlButton: {
     borderRadius: "50%",
     width: 80,
     height: 80,
-    background: "pink",
+    background: useTheme.palette.primary.main,
     marginLeft: "auto",
     marginRight: "auto",
   },
-  swipeButtonSM: {
-    cursor: "pointer",
-    padding: "5px",
+  arrowIcon: {
+    fontSize: 40,
+    color: "white",
   },
-  swipeButtonXS: {
-    padding: "0px",
-  },
-});
+}));
 
 export default styles;

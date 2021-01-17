@@ -1,4 +1,5 @@
 import makeStyles from "@material-ui/styles/makeStyles";
+import useTheme from "../../config/theme";
 
 const styles = makeStyles((theme) => ({
   content: {
@@ -28,7 +29,7 @@ const styles = makeStyles((theme) => ({
     marginLeft: 10,
   },
   gotIt: {
-    color: theme.palette.primary.main,
+    color: useTheme.palette.primary.main,
   },
 }));
 
